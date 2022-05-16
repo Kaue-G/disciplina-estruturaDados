@@ -57,4 +57,30 @@ public class ArvoreBinario {
 			pai.setEsquerda(null);
 		}
 	}
+	
+	public NoBinario buscarNo(NoBinario noAtual, String descricao) {
+		if (noAtual == null) {
+			noAtual = root;
+		}
+		
+		NoBinario no;
+		
+		if (noAtual.getDescricao() == descricao) {
+			return noAtual;
+		} else {
+			if (noAtual.getDireita() != null) {				
+				no = buscarNo(noAtual.getDireita(), descricao);
+			}
+			
+			if(no == null && noAtual.getEsquerda() != null) {
+				no = buscarNo(noAtual.getEsquerda(), descricao);				
+			}
+			
+			if(no != null) {
+				return no;
+			}else {
+				return no;
+			}
+		}
+	}
 }

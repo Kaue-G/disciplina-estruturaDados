@@ -12,5 +12,7 @@ public class HelloArvore {
 		NoBinario testeRemove2 = arvoreBinario.addNo("folha4", "direita", folha2);
 		
 		arvoreBinario.removeNo("esquerda", folha2);
+		
+		arvoreBinario.buscarNo(null, "folha1");
 	}
 }
