@@ -11,8 +11,13 @@ public class HelloArvore {
 		NoBinario testeRemove1 = arvoreBinario.addNo("folha3", "esquerda", folha2);		
 		NoBinario testeRemove2 = arvoreBinario.addNo("folha4", "direita", folha2);
 		
-		arvoreBinario.removeNo("esquerda", folha2);
+		arvoreBinario.addNo("folha5", "esquerda", testeRemove1);
+		arvoreBinario.addNo("folha6", "direita", testeRemove1);
+		arvoreBinario.addNo("folha7", "esquerda", testeRemove2);
+		arvoreBinario.addNo("folha8", "direita", testeRemove2);
 		
-		arvoreBinario.buscarNo(null, "folha1");
+		
+		arvoreBinario.buscarNo(null, "folha8");
+		arvoreBinario.removeNo(folha2);
 	}
 }

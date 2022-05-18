@@ -38,24 +38,57 @@ public class ArvoreBinario {
 		}
 	}
 	
-	public void removeNo(String posicao, NoBinario pai) {
-		if (pai.getEsquerda() == null) {
-			System.out.println("não ha nó a ser removido");
-		} else {
-			if (pai.getDireita() == null) {
-				System.out.println("não ha nó a ser removido");
+//	public void removeNo(String posicao, NoBinario pai) {
+//		if (pai.getEsquerda() == null) {
+//			System.out.println("não ha nó a ser removido");
+//		} else {
+//			if (pai.getDireita() == null) {
+//				System.out.println("não ha nó a ser removido");
+//			} else {
+//				removeFilho(posicao, pai);
+//			}
+//		}
+//	}
+//	
+//	private void removeFilho(String posicao, NoBinario pai) {
+//		if (posicao.equals("direita")) {
+//			pai.setDireita(null);
+//		} else {
+//			pai.setEsquerda(null);
+//		}
+//	}
+	
+	public void removeNo (NoBinario tirarNo) {
+		if (tirarNo == null) {
+			System.out.println("não há no a ser removido");
+		}
+		
+		if (tirarNo != root) {
+			NoBinario pai = tirarNo.getPai();
+			
+			if (pai.getDireita() == tirarNo) {
+				pai.setDireita(null); 
 			} else {
-				removeFilho(posicao, pai);
+				pai.setEsquerda(null);
 			}
 		}
+		
+		if (tirarNo.getDireita() != null) {
+			removeNo(tirarNo.getDireita());
+		}
+		
+		if (tirarNo.getEsquerda() != null) {
+			removeNo(tirarNo.getEsquerda());
+		}
+		
+		apagarNo(tirarNo);
 	}
 	
-	private void removeFilho(String posicao, NoBinario pai) {
-		if (posicao.equals("direita")) {
-			pai.setDireita(null);
-		} else {
-			pai.setEsquerda(null);
-		}
+	private void apagarNo (NoBinario apagar) {
+		apagar.setDescricao(null);
+		apagar.setDireita(null);
+		apagar.setEsquerda(null);
+		apagar.setPai(null);
 	}
 	
 	public NoBinario buscarNo(NoBinario noAtual, String descricao) {
@@ -63,24 +96,19 @@ public class ArvoreBinario {
 			noAtual = root;
 		}
 		
-		NoBinario no;
-		
 		if (noAtual.getDescricao() == descricao) {
 			return noAtual;
-		} else {
-			if (noAtual.getDireita() != null) {				
-				no = buscarNo(noAtual.getDireita(), descricao);
-			}
-			
-			if(no == null && noAtual.getEsquerda() != null) {
-				no = buscarNo(noAtual.getEsquerda(), descricao);				
-			}
-			
-			if(no != null) {
-				return no;
-			}else {
-				return no;
-			}
 		}
+		
+		NoBinario noAuxiliar = null;
+		if (noAtual.getDireita() != null) {				
+			noAuxiliar = buscarNo(noAtual.getDireita(), descricao);
+		}
+		
+		if(noAuxiliar == null && noAtual.getEsquerda() != null) {
+			noAuxiliar = buscarNo(noAtual.getEsquerda(), descricao);				
+		}
+		
+		return noAuxiliar;
 	}
 }
